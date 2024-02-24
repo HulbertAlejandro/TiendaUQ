@@ -1,5 +1,4 @@
 package co.edu.uniquindio.tiendaUQ.Class;
-
 import co.edu.uniquindio.tiendaUQ.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.tiendaUQ.exceptions.CampoRepetido;
 import co.edu.uniquindio.tiendaUQ.exceptions.CampoVacioException;
@@ -12,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -21,8 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-
 public class Tienda implements Initializable {
     private final String RUTA_CLIENTES = "src/main/resources/serializable/cliente.ser";
     private static Tienda tienda;
