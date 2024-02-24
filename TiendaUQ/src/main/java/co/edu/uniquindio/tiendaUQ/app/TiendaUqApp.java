@@ -16,7 +16,7 @@ public class TiendaUqApp extends Application {
 
         Scene scene = new Scene(parent);
         stage.setScene(scene);
-        stage.setTitle("Tienda UQ Virtual");
+        stage.setTitle("UQ Online Store");
         stage.show();
     }
 

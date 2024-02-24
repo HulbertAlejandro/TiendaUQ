@@ -1,6 +1,6 @@
 package co.edu.uniquindio.tiendaUQ.controladores;
 
-import co.edu.uniquindio.tiendaUQ.Class.Tienda;
+import co.edu.uniquindio.tiendaUQ.modelo.Tienda;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
