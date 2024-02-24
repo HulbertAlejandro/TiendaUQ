@@ -11,9 +11,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+public class Carrito implements Serializable {
 
-public class Cliente implements Serializable {
-
-    private String direccion, nombre, numeroIdentificacion, usuario, contrasena;
-
+    private String codigo;
 }
