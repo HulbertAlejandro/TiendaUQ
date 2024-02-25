@@ -1,14 +1,12 @@
 package co.edu.uniquindio.tiendaUQ.utils;
 
 import co.edu.uniquindio.tiendaUQ.modelo.Cliente;
+import co.edu.uniquindio.tiendaUQ.modelo.Producto;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Clase de utilidad para la lectura y escritura de archivos
@@ -74,11 +72,20 @@ public class ArchivoUtils {
         ft.close();
     }
 
-    public static void serializarClientes (String ruta, List<Cliente> guias)
+    public static void serializarClientes (String ruta, HashMap<String,Cliente> clientes)
     {
         try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ruta))) {
-            salida.writeObject(guias);
+            salida.writeObject(clientes);
             System.out.println("Cliente serializado correctamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void serializarProductos (String ruta, HashMap<String, Producto> productos)
+    {
+        try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ruta))) {
+            salida.writeObject(productos);
+            System.out.println("Producto serializado correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }

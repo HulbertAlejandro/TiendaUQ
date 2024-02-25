@@ -12,12 +12,7 @@
                 <Image url="@../imagenes/inicio.png" />
             </image>
         </ImageView>
-        <Button fx:id="btnCrearProducto" layoutX="116.0" layoutY="141.0" mnemonicParsing="false" onAction="#crearProducto" text="CREATE PRODUCT">
-            <font>
-                <Font name="Franklin Gothic Medium" size="14.0" />
-            </font>
-        </Button>
-        <Button fx:id="btnInventario" layoutX="136.0" layoutY="187.0" mnemonicParsing="false" onAction="#inventario" text="INVENTORY">
+        <Button fx:id="btnInventario" layoutX="101.0" layoutY="113.0" mnemonicParsing="false" onAction="#inventario" prefHeight="26.0" prefWidth="163.0" text="INVENTORY">
             <font>
                 <Font name="Franklin Gothic Medium" size="14.0" />
             </font>

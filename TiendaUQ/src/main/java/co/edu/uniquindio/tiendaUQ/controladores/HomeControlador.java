@@ -12,17 +12,10 @@ public class HomeControlador {
     @FXML
     Button btnCrearProducto, btnInventario;
 
-    public void crearProducto(ActionEvent event){
-        Object evt = event.getSource();
-        if(evt.equals(btnCrearProducto)){
-            tienda.loadStage("/ventanas/createProduct.fxml", event);
-        }
-    }
-
     public void inventario(ActionEvent event){
         Object evt = event.getSource();
         if(evt.equals(btnInventario)){
-            tienda.loadStage("/ventanas/inventory.fxml", event);
+            tienda.loadStage("/ventanas/inventoryPage.fxml", event);
         }
     }
 }

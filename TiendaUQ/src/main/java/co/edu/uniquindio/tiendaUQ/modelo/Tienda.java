@@ -6,7 +6,6 @@ import co.edu.uniquindio.tiendaUQ.exceptions.CampoVacioException;
 import co.edu.uniquindio.tiendaUQ.utils.ArchivoUtils;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,49 +14,57 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
-public class Tienda implements Initializable {
+import java.util.*;
+
+public class Tienda {
     private final String RUTA_CLIENTES = "src/main/resources/serializable/cliente.ser";
+    private final String RUTA_PRODUCTOS = "src/main/resources/serializable/productos.ser";
     private static Tienda tienda;
-    private List<Cliente> clientes = new ArrayList<Cliente>();
-    public static Tienda getInstance()
-    {
-        if(tienda== null)
-        {
+    private Map<String, Cliente> clientes = new HashMap<>();
+    private Map<String, Producto> productos = new HashMap<>();
+
+    public static Tienda getInstance() {
+        if (tienda == null) {
             tienda = new Tienda();
         }
         return tienda;
     }
+
     private void leerClientes() {
         try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_CLIENTES))) {
-            ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) entrada.readObject();
-            clientes.addAll(listaClientes);
+            HashMap<String, Cliente> listaClientes = (HashMap<String, Cliente>) entrada.readObject();
+            clientes.putAll(listaClientes);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
-    public Cliente registrarCliente(String identificationNumber, String nombre, String direccion, String usuario, String contrasena) throws CampoVacioException, CampoObligatorioException, CampoRepetido
-    {
+
+    private void leerProductos() {
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_PRODUCTOS))) {
+            HashMap<String, Producto> listaProductos = (HashMap<String, Producto>) entrada.readObject();
+            productos.putAll(listaProductos);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Cliente registrarCliente(String identificationNumber, String nombre, String direccion, String usuario, String contrasena) throws CampoVacioException, CampoObligatorioException, CampoRepetido {
         if (nombre == null || nombre.isEmpty()) {
             throw new CampoObligatorioException(("Es necesario ingresar el nombre"));
         }
         if (direccion == null || direccion.isEmpty()) {
             throw new CampoVacioException("Es necesario ingresar la direccion.");
         }
-        if(usuario == null || usuario.isEmpty()){
+        if (usuario == null || usuario.isEmpty()) {
             throw new CampoVacioException("Es necesario ingresar el usuario");
         }
-        if( identificationNumber == null){
+        if (identificationNumber == null) {
             throw new CampoVacioException("Es necesario ingresar el usuario");
         }
-        if(contrasena == null || contrasena.isEmpty()){
+        if (contrasena == null || contrasena.isEmpty()) {
             throw new CampoVacioException("Es necesario ingresar la contraseña");
         }
-        if (tienda.verifyCredentials(usuario,contrasena)) {
+        if (tienda.verifyCredentials(usuario, contrasena)) {
             throw new CampoRepetido("Las credenciales proporcionadas no estan disponibles");
         }
         Cliente cliente = Cliente.builder().
@@ -67,21 +74,21 @@ public class Tienda implements Initializable {
                 usuario(usuario).
                 contrasena(contrasena)
                 .build();
-        clientes.add(cliente);
-        ArchivoUtils.serializarClientes(RUTA_CLIENTES,clientes);
+        clientes.put(identificationNumber, cliente);
+        ArchivoUtils.serializarClientes(RUTA_CLIENTES, (HashMap) clientes);
         return cliente;
     }
+
     private boolean verifyCredentials(String usuario, String contrasena) {
         boolean state = false;
-        for (Cliente c : clientes)
-        {
-            if (c.getUsuario().equals(usuario) && c.getContrasena().equals(contrasena))
-            {
+        for (Cliente c : clientes.values()) {
+            if (c.getUsuario().equals(usuario) && c.getContrasena().equals(contrasena)) {
                 state = true;
             }
         }
         return state;
     }
+
     public void loadStage(String url, Event event) {
         try {
             ((Node) (event.getSource())).getScene().getWindow().hide();
@@ -94,27 +101,96 @@ public class Tienda implements Initializable {
         } catch (Exception ignored) {
         }
     }
-    public boolean verifyUser(String user, String password){
-        return (findUser(user,password)) ? true : false;
+
+    public boolean verifyUser(String user, String password) {
+        return (findUser(user, password)) ? true : false;
     }
 
     private boolean findUser(String user, String password) {
-        for (Cliente cliente : clientes){
-           if(cliente.getUsuario().equals(user) && cliente.getContrasena().equals(password)){
-               return true;
-           }
+        for (Cliente cliente : clientes.values()) {
+            if (cliente.getUsuario().equals(user) && cliente.getContrasena().equals(password)) {
+                return true;
+            }
         }
         return false;
     }
-    public void mostrarMensaje(Alert.AlertType tipo, String mensaje){
+
+    public void mostrarMensaje(Alert.AlertType tipo, String mensaje) {
         Alert alert = new Alert(tipo);
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.show();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initializar() {
         leerClientes();
+        leerProductos();
+    }
+
+    public void registrarProducto(String name, String code, String price, String quantity) throws CampoObligatorioException, CampoVacioException, CampoRepetido {
+        if (name == null || name.isEmpty()) {
+            throw new CampoObligatorioException(("Es necesario ingresar el nombre"));
+        }
+        if (code == null || code.isEmpty()) {
+            throw new CampoVacioException("Es necesario ingresar el codigo.");
+        }
+        if (price == null || price.isEmpty()) {
+            throw new CampoVacioException("Es necesario ingresar el precio");
+        }
+        if (quantity == null || quantity.isEmpty()) {
+            throw new CampoVacioException("Es necesario ingresar la cantidad");
+        }
+        if (tienda.verifyCodes(code)) {
+            throw new CampoRepetido("El codigo del producto no esta disponible");
+        }
+        Producto producto = Producto.builder()
+                .nombre(name)
+                .cantidad(Integer.parseInt(quantity))
+                .codigo(code)
+                .precio(Float.valueOf(price))
+                .build();
+        productos.put(code,producto);
+        ArchivoUtils.serializarClientes(RUTA_PRODUCTOS, (HashMap) productos);
+    }
+
+    private boolean verifyCodes(String code) {
+        for (Producto producto : productos.values()) {
+            if (producto.getCodigo().equals(code)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public HashMap<String, Producto> enviarProductos() {
+        return (HashMap<String, Producto>) productos;
+    }
+
+    public void eliminarProducto(Producto productoSeleccionado) {
+        productos.remove(productoSeleccionado.getCodigo());
+    }
+
+    public void editarProducto(String name, String code, String price, String quantity, Producto oldProduct) throws CampoObligatorioException, CampoVacioException, CampoRepetido {
+        if (name == null || name.isEmpty()) {
+            throw new CampoObligatorioException(("Es necesario ingresar el nombre"));
+        }
+        if (price == null || price.isEmpty()) {
+            throw new CampoVacioException("Es necesario ingresar el precio");
+        }
+        if (quantity == null || quantity.isEmpty()) {
+            throw new CampoVacioException("Es necesario ingresar la cantidad");
+        }
+        if (tienda.verifyCodes(code)) {
+            throw new CampoRepetido("El codigo del producto no esta disponible");
+        }
+        Producto producto = Producto.builder()
+                .nombre(name)
+                .cantidad(Integer.parseInt(quantity))
+                .codigo(code)
+                .precio(Float.valueOf(price))
+                .build();
+        productos.replace(code,oldProduct,producto);
+        ArchivoUtils.serializarClientes(RUTA_PRODUCTOS, (HashMap) productos);
     }
 }
+
