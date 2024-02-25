@@ -81,7 +81,6 @@ public class InventoryControlador implements Initializable {
             tienda.eliminarProducto(productoSeleccionado);
             tienda.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Producto eliminado correctamente");
             cargarTabla();
-           
         }
     }
     private void cargarTabla() {
