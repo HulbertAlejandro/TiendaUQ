@@ -40,7 +40,7 @@ public class Tienda implements Initializable {
             e.printStackTrace();
         }
     }
-    public Cliente registrarCliente(String nombre, String direccion, String usuario, String contrasena, String identificationNumber) throws CampoVacioException, CampoObligatorioException, CampoRepetido
+    public Cliente registrarCliente(String identificationNumber, String nombre, String direccion, String usuario, String contrasena) throws CampoVacioException, CampoObligatorioException, CampoRepetido
     {
         if (nombre == null || nombre.isEmpty()) {
             throw new CampoObligatorioException(("Es necesario ingresar el nombre"));

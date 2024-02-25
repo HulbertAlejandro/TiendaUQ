@@ -15,7 +15,7 @@ public class LoginControlador {
     private TextField user, password;
     public void verify(ActionEvent actionEvent) {
         if(tienda.verifyUser(user.getText(),password.getText())){
-            tienda.loadStage("TiendaUQ/src/main/resources/ventanas/homePage.fxml",actionEvent);
+            tienda.loadStage("/ventanas/home.fxml",actionEvent);
         }else{
             tienda.mostrarMensaje(Alert.AlertType.ERROR, "Los datos ingresados son erroneos");
         }

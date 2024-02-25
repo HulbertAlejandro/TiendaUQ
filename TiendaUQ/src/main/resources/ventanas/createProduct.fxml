@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="335.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.CreateProductControlador">
+    <children>
+        <TextField fx:id="txtCodigo" layoutX="52.0" layoutY="108.0" prefHeight="25.0" prefWidth="273.0" promptText="Code">
+            <font>
+                <Font name="Calibri Bold" size="12.0" />
+            </font></TextField>
+        <TextField fx:id="txtNombre" layoutX="52.0" layoutY="145.0" prefHeight="25.0" prefWidth="273.0" promptText="Product name">
+            <font>
+                <Font name="Calibri Bold" size="12.0" />
+            </font></TextField>
+        <TextField fx:id="txtPrecio" layoutX="52.0" layoutY="188.0" prefHeight="25.0" prefWidth="273.0" promptText="Price">
+            <font>
+                <Font name="Calibri Bold" size="12.0" />
+            </font></TextField>
+        <TextField fx:id="txtCantidad" layoutX="52.0" layoutY="229.0" prefHeight="25.0" prefWidth="273.0" promptText="Quantity">
+            <font>
+                <Font name="Calibri Bold" size="12.0" />
+            </font></TextField>
+        <Button fx:id="btnGuardar" layoutX="189.0" layoutY="275.0" mnemonicParsing="false" text="SAVE">
+            <font>
+                <Font name="Calibri Bold" size="14.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnRegresar" layoutX="126.0" layoutY="275.0" mnemonicParsing="false" onAction="#regresarLogin" text="BACK">
+            <font>
+                <Font name="Calibri Bold" size="14.0" />
+            </font>
+        </Button>
+      <Label layoutX="77.0" layoutY="51.0" text="CREAR PRODUCTO" textFill="#0069ff">
+         <font>
+            <Font name="Inter Semi Bold" size="24.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
