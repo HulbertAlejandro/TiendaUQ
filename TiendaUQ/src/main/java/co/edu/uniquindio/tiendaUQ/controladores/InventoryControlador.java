@@ -24,7 +24,9 @@ public class InventoryControlador implements Initializable {
 
     private final Tienda tienda = Tienda.getInstance();
     @FXML
-    public TextField nameEdit, codeEdit, priceEdit, quantityEdit;
+    public TextField nameEdit, priceEdit, quantityEdit;
+    @FXML
+    public Label codeEdit;
     @FXML
     public Button bttEdit, bttRemove, bttBack, bttCreate;
     @FXML
@@ -35,18 +37,13 @@ public class InventoryControlador implements Initializable {
     public TableColumn<Producto, String> nameTable,codeTable, quantityTable,priceTable;
     @FXML
     public TableView<Producto> table;
-    @FXML
-    private Button btnRegresar;
-        public void create(ActionEvent actionEvent) {
+        public void create(ActionEvent actionEvent){
         try {
             tienda.registrarProducto(nameCreate.getText(),codeCreate.getText(),priceCreate.getText(),quantityCreate.getText());
             tienda.mostrarMensaje(Alert.AlertType.INFORMATION, "Se ha registrado correctamente el producto: " + nameCreate.getText());
-        } catch (CampoObligatorioException e) {
-            throw new RuntimeException(e);
-        } catch (CampoVacioException e) {
-            throw new RuntimeException(e);
-        } catch (CampoRepetido e) {
-            throw new RuntimeException(e);
+            tienda.loadStage("/ventanas/inventoryPage.fxml",actionEvent);
+        } catch (CampoObligatorioException | CampoVacioException | CampoRepetido e) {
+            tienda.mostrarMensaje(Alert.AlertType.ERROR,e.getMessage());
         }
     }
     public void select(ActionEvent actionEvent) {
@@ -54,7 +51,7 @@ public class InventoryControlador implements Initializable {
             tienda.mostrarMensaje(Alert.AlertType.ERROR, "Se intento seleccionar un producto erroneo");
         } else {
             tienda.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se selecciono un producto");
-            Producto productoSeleccionado = (Producto) table.getSelectionModel().getSelectedItems();
+            Producto productoSeleccionado = table.getSelectionModel().getSelectedItem();
             nameEdit.setText(productoSeleccionado.getNombre());
             codeEdit.setText(productoSeleccionado.getCodigo());
             priceEdit.setText(productoSeleccionado.getPrecio()+"");
@@ -63,24 +60,21 @@ public class InventoryControlador implements Initializable {
     }
     public void edit(ActionEvent actionEvent) {
         try {
-            tienda.editarProducto(nameEdit.getText(),codeEdit.getText(),priceEdit.getText(),quantityEdit.getText(),table.getSelectionModel().getSelectedItem());
+            tienda.editarProducto(nameEdit.getText(),priceEdit.getText(),quantityEdit.getText(),table.getSelectionModel().getSelectedItem());
             tienda.mostrarMensaje(Alert.AlertType.INFORMATION, "Se ha registrado correctamente el producto: " + nameCreate.getText());
-        } catch (CampoObligatorioException e) {
-            throw new RuntimeException(e);
-        } catch (CampoVacioException e) {
-            throw new RuntimeException(e);
-        } catch (CampoRepetido e) {
-            throw new RuntimeException(e);
+            tienda.loadStage("/ventanas/inventoryPage.fxml",actionEvent);
+        } catch (CampoObligatorioException | CampoVacioException | CampoRepetido e) {
+            tienda.mostrarMensaje(Alert.AlertType.ERROR, e.getMessage());
         }
     }
     public void remove(ActionEvent actionEvent) {
         if (table.getSelectionModel().getSelectedIndex() == -1) {
             tienda.mostrarMensaje(Alert.AlertType.ERROR, "Se intento seleccionar un producto erroneo");
         } else {
-            Producto productoSeleccionado = (Producto) table.getSelectionModel().getSelectedItems();
+            Producto productoSeleccionado = table.getSelectionModel().getSelectedItem();
             tienda.eliminarProducto(productoSeleccionado);
             tienda.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Producto eliminado correctamente");
-            cargarTabla();
+            tienda.loadStage("/ventanas/inventoryPage.fxml",actionEvent);
         }
     }
     private void cargarTabla() {
@@ -89,7 +83,6 @@ public class InventoryControlador implements Initializable {
         codeTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCodigo()));
         priceTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPrecio()+""));
         quantityTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCantidad()+""));
-        table.getColumns().addAll(nameTable, codeTable, priceTable, quantityTable);
         table.setItems(listaProductos);
     }
     public void back(ActionEvent actionEvent) {

@@ -170,7 +170,7 @@ public class Tienda {
         productos.remove(productoSeleccionado.getCodigo());
     }
 
-    public void editarProducto(String name, String code, String price, String quantity, Producto oldProduct) throws CampoObligatorioException, CampoVacioException, CampoRepetido {
+    public void editarProducto(String name, String price, String quantity, Producto oldProduct) throws CampoObligatorioException, CampoVacioException, CampoRepetido {
         if (name == null || name.isEmpty()) {
             throw new CampoObligatorioException(("Es necesario ingresar el nombre"));
         }
@@ -180,16 +180,13 @@ public class Tienda {
         if (quantity == null || quantity.isEmpty()) {
             throw new CampoVacioException("Es necesario ingresar la cantidad");
         }
-        if (tienda.verifyCodes(code)) {
-            throw new CampoRepetido("El codigo del producto no esta disponible");
-        }
         Producto producto = Producto.builder()
                 .nombre(name)
                 .cantidad(Integer.parseInt(quantity))
-                .codigo(code)
                 .precio(Float.valueOf(price))
+                .codigo(oldProduct.getCodigo())
                 .build();
-        productos.replace(code,oldProduct,producto);
+        productos.replace(oldProduct.getCodigo(), oldProduct,producto);
         ArchivoUtils.serializarClientes(RUTA_PRODUCTOS, (HashMap) productos);
     }
 }

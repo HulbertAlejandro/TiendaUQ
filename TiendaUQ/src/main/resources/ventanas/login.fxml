@@ -14,11 +14,11 @@
       </ImageView>
       <TextField fx:id="user" layoutX="43.0" layoutY="219.0" prefHeight="25.0" prefWidth="230.0" promptText="Enter your user">
          <font>
-            <Font name="Century" size="12.0" />
+            <Font name="Franklin Gothic Medium" size="13.0" />
          </font></TextField>
       <TextField fx:id="password" layoutX="43.0" layoutY="261.0" prefHeight="25.0" prefWidth="230.0" promptText="Enter your password">
          <font>
-            <Font name="Century" size="12.0" />
+            <Font name="Franklin Gothic Medium" size="13.0" />
          </font></TextField>
       <Button fx:id="buttonLogin" layoutX="97.0" layoutY="307.0" mnemonicParsing="false" onAction="#verify" prefHeight="25.0" prefWidth="123.0" text="LOG IN" textAlignment="CENTER">
          <font>
