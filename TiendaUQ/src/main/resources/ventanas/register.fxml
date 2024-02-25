@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="440.0" prefWidth="360.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.RegisterControlador">
+   <children>
+      <ImageView fitHeight="184.0" fitWidth="256.0" layoutX="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes/registrate.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtNombre" layoutX="52.0" layoutY="156.0" prefHeight="25.0" prefWidth="273.0" promptText="Name">
+         <font>
+            <Font name="Calibri Bold" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="txtIdentificacion" layoutX="52.0" layoutY="195.0" prefHeight="25.0" prefWidth="273.0" promptText="ID">
+         <font>
+            <Font name="Calibri Bold" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="txtDireccion" layoutX="52.0" layoutY="237.0" prefHeight="25.0" prefWidth="273.0" promptText="Address">
+         <font>
+            <Font name="Calibri Bold" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="txtUsuario" layoutX="52.0" layoutY="276.0" prefHeight="25.0" prefWidth="273.0" promptText="User">
+         <font>
+            <Font name="Calibri Bold" size="12.0" />
+         </font></TextField>
+      <TextField fx:id="txtContrasena" layoutX="52.0" layoutY="316.0" prefHeight="25.0" prefWidth="273.0" promptText="Password">
+         <font>
+            <Font name="Calibri Bold" size="12.0" />
+         </font></TextField>
+      <Button fx:id="btnGuardar" layoutX="189.0" layoutY="369.0" mnemonicParsing="false" onAction="#registrarCliente" text="SAVE">
+         <font>
+            <Font name="Franklin Gothic Medium" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnRegresar" layoutX="128.0" layoutY="369.0" mnemonicParsing="false" onAction="#regresarLogin" text="BACK">
+         <font>
+            <Font name="Franklin Gothic Medium" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

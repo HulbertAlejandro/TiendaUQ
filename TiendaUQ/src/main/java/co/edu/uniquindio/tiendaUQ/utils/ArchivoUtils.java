@@ -1,6 +1,6 @@
 package co.edu.uniquindio.tiendaUQ.utils;
 
-import co.edu.uniquindio.tiendaUQ.Class.Cliente;
+import co.edu.uniquindio.tiendaUQ.modelo.Cliente;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -78,7 +78,7 @@ public class ArchivoUtils {
     {
         try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ruta))) {
             salida.writeObject(guias);
-            System.out.println("Clientes serializados correctamente.");
+            System.out.println("Cliente serializado correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }

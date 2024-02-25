@@ -8,7 +8,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-public class Detalleventa implements Serializable {
+
+public class DetalleVenta implements Serializable {
     private int cantidad;
     private float subtotal;
 }

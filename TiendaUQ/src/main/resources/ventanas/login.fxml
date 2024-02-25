@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="305.0" style="-fx-background-color: FFFFFFFFFFF;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.InicioControlador">
+<AnchorPane prefHeight="400.0" prefWidth="305.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.LoginControlador">
    <children>
       <ImageView fitHeight="244.0" fitWidth="215.0" layoutX="45.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,12 +20,12 @@
          <font>
             <Font name="Century" size="12.0" />
          </font></TextField>
-      <Button fx:id="button" layoutX="97.0" layoutY="307.0" mnemonicParsing="false" onAction="#verify" prefHeight="25.0" prefWidth="123.0" text="LOG IN" textAlignment="CENTER">
+      <Button fx:id="buttonLogin" layoutX="97.0" layoutY="307.0" mnemonicParsing="false" onAction="#verify" prefHeight="25.0" prefWidth="123.0" text="LOG IN" textAlignment="CENTER">
          <font>
             <Font name="Calibri Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="97.0" layoutY="342.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="REGISTER">
+      <Button fx:id="buttonRegister" layoutX="97.0" layoutY="342.0" mnemonicParsing="false" onAction="#registrarUsuario" prefHeight="25.0" prefWidth="123.0" text="REGISTER">
          <font>
             <Font name="Calibri Bold" size="13.0" />
          </font>

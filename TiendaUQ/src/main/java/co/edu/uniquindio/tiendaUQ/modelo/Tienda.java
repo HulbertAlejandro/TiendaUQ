@@ -1,13 +1,9 @@
-<<<<<<< HEAD:TiendaUQ/src/main/java/co/edu/uniquindio/tiendaUQ/modelo/Tienda.java
 package co.edu.uniquindio.tiendaUQ.modelo;
 
-=======
-package co.edu.uniquindio.tiendaUQ.Class;
 import co.edu.uniquindio.tiendaUQ.exceptions.CampoObligatorioException;
 import co.edu.uniquindio.tiendaUQ.exceptions.CampoRepetido;
 import co.edu.uniquindio.tiendaUQ.exceptions.CampoVacioException;
 import co.edu.uniquindio.tiendaUQ.utils.ArchivoUtils;
->>>>>>> 76380aa6c2c238540c9cd93bab1c0c24387121cf:TiendaUQ/src/main/java/co/edu/uniquindio/tiendaUQ/Class/Tienda.java
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,18 +19,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-<<<<<<< HEAD:TiendaUQ/src/main/java/co/edu/uniquindio/tiendaUQ/modelo/Tienda.java
-
-public class Tienda {
-
-=======
 import java.util.ResourceBundle;
 public class Tienda implements Initializable {
     private final String RUTA_CLIENTES = "src/main/resources/serializable/cliente.ser";
->>>>>>> 76380aa6c2c238540c9cd93bab1c0c24387121cf:TiendaUQ/src/main/java/co/edu/uniquindio/tiendaUQ/Class/Tienda.java
     private static Tienda tienda;
     private List<Cliente> clientes = new ArrayList<Cliente>();
-
     public static Tienda getInstance()
     {
         if(tienda== null)
@@ -43,9 +32,6 @@ public class Tienda implements Initializable {
         }
         return tienda;
     }
-<<<<<<< HEAD:TiendaUQ/src/main/java/co/edu/uniquindio/tiendaUQ/modelo/Tienda.java
-
-=======
     private void leerClientes() {
         try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_CLIENTES))) {
             ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) entrada.readObject();
@@ -54,7 +40,7 @@ public class Tienda implements Initializable {
             e.printStackTrace();
         }
     }
-    public void registrarCliente(String nombre, String direccion, String usuario, String contrasena, String identificationNumber) throws CampoVacioException, CampoObligatorioException, CampoRepetido
+    public Cliente registrarCliente(String nombre, String direccion, String usuario, String contrasena, String identificationNumber) throws CampoVacioException, CampoObligatorioException, CampoRepetido
     {
         if (nombre == null || nombre.isEmpty()) {
             throw new CampoObligatorioException(("Es necesario ingresar el nombre"));
@@ -83,6 +69,7 @@ public class Tienda implements Initializable {
                 .build();
         clientes.add(cliente);
         ArchivoUtils.serializarClientes(RUTA_CLIENTES,clientes);
+        return cliente;
     }
     private boolean verifyCredentials(String usuario, String contrasena) {
         boolean state = false;
@@ -95,8 +82,7 @@ public class Tienda implements Initializable {
         }
         return state;
     }
->>>>>>> 76380aa6c2c238540c9cd93bab1c0c24387121cf:TiendaUQ/src/main/java/co/edu/uniquindio/tiendaUQ/Class/Tienda.java
-    public void loadStage(String url, Event event, String mensaje) {
+    public void loadStage(String url, Event event) {
         try {
             ((Node) (event.getSource())).getScene().getWindow().hide();
             Parent root = FXMLLoader.load(Objects.requireNonNull(Tienda.class.getResource(url)));

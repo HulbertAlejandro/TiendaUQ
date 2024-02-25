@@ -12,6 +12,6 @@ import java.io.Serializable;
 
 public class Cliente implements Serializable {
 
-    private String direccion, nombre, numeroIdentificacion, usuario, contrasena;
+    private String numeroIdentificacion, nombre, direccion, usuario, contrasena;
 
 }

@@ -7,18 +7,24 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class InicioControlador {
+public class LoginControlador {
     private final Tienda tienda = Tienda.getInstance();
     @FXML
-    private Button button;
+    private Button buttonLogin, buttonRegister;
     @FXML
     private TextField user, password;
     public void verify(ActionEvent actionEvent) {
         if(tienda.verifyUser(user.getText(),password.getText())){
-            tienda.loadStage("TiendaUQ/src/main/resources/ventanas/homePage.fxml",actionEvent,"Se ingresa a la pagina principal");
+            tienda.loadStage("TiendaUQ/src/main/resources/ventanas/homePage.fxml",actionEvent);
         }else{
             tienda.mostrarMensaje(Alert.AlertType.ERROR, "Los datos ingresados son erroneos");
         }
     }
 
+    public void registrarUsuario(ActionEvent event){
+        Object evt = event.getSource();
+        if(evt.equals(buttonRegister)){
+            tienda.loadStage("/ventanas/register.fxml", event);
+        }
+    }
 }

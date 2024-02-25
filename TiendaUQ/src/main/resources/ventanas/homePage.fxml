@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFFFFFFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.InicioControlador">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFFFFFFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.LoginControlador">
    <children>
       <Separator layoutX="24.0" layoutY="48.0" prefHeight="8.0" prefWidth="555.0" />
       <Separator layoutX="299.0" layoutY="56.0" orientation="VERTICAL" prefHeight="338.0" prefWidth="5.0" />

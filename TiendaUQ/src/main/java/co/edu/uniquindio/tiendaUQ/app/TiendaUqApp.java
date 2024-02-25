@@ -11,7 +11,7 @@ public class TiendaUqApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader(TiendaUqApp.class.getResource("/ventanas/inicio.fxml"));
+        FXMLLoader loader = new FXMLLoader(TiendaUqApp.class.getResource("/ventanas/login.fxml"));
         Parent parent = loader.load();
 
         Scene scene = new Scene(parent);
