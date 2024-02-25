@@ -1,4 +1,4 @@
-package co.edu.uniquindio.tiendaUQ.Class;
+package co.edu.uniquindio.tiendaUQ.modelo;
 
 import lombok.*;
 
