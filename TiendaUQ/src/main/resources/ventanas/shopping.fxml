@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="363.0" prefWidth="660.0" style="-fx-background-color: FFFFFFFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.InventoryControlador">
+<AnchorPane prefHeight="363.0" prefWidth="660.0" style="-fx-background-color: FFFFFFFFFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.ShoppingControlador">
    <children>
       <Separator layoutX="5.0" layoutY="48.0" prefHeight="12.0" prefWidth="647.0" />
       <Separator layoutX="327.0" layoutY="56.0" orientation="VERTICAL" prefHeight="295.0" prefWidth="6.0" />
@@ -33,7 +33,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="bttSelect" layoutX="24.0" layoutY="269.0" mnemonicParsing="false" onAction="#select" prefHeight="26.0" prefWidth="293.0" text="Add to cart">
+      <Button fx:id="bttAdd" layoutX="24.0" layoutY="269.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="293.0" text="Add to cart">
          <font>
             <Font name="Franklin Gothic Medium" size="14.0" />
          </font>
@@ -64,12 +64,12 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="bttSelect1" layoutX="24.0" layoutY="312.0" mnemonicParsing="false" onAction="#select" prefHeight="26.0" prefWidth="293.0" text="Back to menu">
+      <Button fx:id="bttBack" layoutX="24.0" layoutY="312.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="293.0" text="Back to menu">
          <font>
             <Font name="Franklin Gothic Medium" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="bttRemove1" layoutX="344.0" layoutY="312.0" mnemonicParsing="false" onAction="#remove" prefHeight="26.0" prefWidth="293.0" text="Pay">
+      <Button fx:id="bttPay" layoutX="344.0" layoutY="312.0" mnemonicParsing="false" onAction="#remove" prefHeight="26.0" prefWidth="293.0" text="Pay">
          <font>
             <Font name="Franklin Gothic Medium" size="14.0" />
          </font>

@@ -189,5 +189,32 @@ public class Tienda {
         productos.replace(oldProduct.getCodigo(), oldProduct,producto);
         ArchivoUtils.serializarClientes(RUTA_PRODUCTOS, (HashMap) productos);
     }
+
+    public boolean verifyInventory(Producto productoSeleccionado, int cantidad) {
+        for (Producto producto : productos.values()) {
+            if (producto.getCodigo().equals(productoSeleccionado.getCodigo())) {
+                if(producto.getCantidad()>= cantidad){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void updateInventory(Producto productoSeleccionado) {
+        for (Producto producto : productos.values()) {
+            if (producto.getCodigo().equals(productoSeleccionado.getCodigo())) {
+                Producto productoReplace = Producto.builder()
+                        .nombre(producto.getNombre())
+                        .codigo(producto.getCodigo())
+                        .precio(producto.getPrecio())
+                        .cantidad(producto.getCantidad() + productoSeleccionado.getCantidad())
+                        .build();
+                productos.replace(productoSeleccionado.getCodigo(), producto, productoReplace);
+            }
+        }
+    }
 }
 
