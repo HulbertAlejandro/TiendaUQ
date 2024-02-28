@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.ShoppingControlador">
+<AnchorPane prefHeight="480.0" prefWidth="687.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.ShoppingControlador">
    <children>
-      <Label alignment="CENTER" layoutX="73.0" layoutY="24.0" prefHeight="33.0" prefWidth="555.0" text="Shopping" textAlignment="CENTER" textFill="#2e3966" textOverrun="CENTER_ELLIPSIS">
+      <Label alignment="CENTER" layoutX="66.0" layoutY="14.0" prefHeight="33.0" prefWidth="555.0" text="Shopping" textAlignment="CENTER" textFill="#2e3966" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font name="Calibri Bold" size="40.0" />
          </font>
@@ -68,5 +68,7 @@
             <Font name="Franklin Gothic Medium" size="14.0" />
          </font>
       </Button>
+      <Separator layoutX="24.0" layoutY="83.0" prefHeight="3.0" prefWidth="639.0" />
+      <Separator layoutX="340.0" layoutY="86.0" orientation="VERTICAL" prefHeight="388.0" prefWidth="14.0" />
    </children>
 </AnchorPane>

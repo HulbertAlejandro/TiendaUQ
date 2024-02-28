@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="560.0" prefWidth="620.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.InventoryControlador">
+<AnchorPane prefHeight="429.0" prefWidth="620.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.InventoryControlador">
    <children>
-      <Label alignment="CENTER" layoutX="40.0" layoutY="23.0" prefHeight="33.0" prefWidth="555.0" text="Inventory" textAlignment="CENTER" textFill="#2e3966" textOverrun="CENTER_ELLIPSIS">
+      <Label alignment="CENTER" layoutX="40.0" layoutY="14.0" prefHeight="33.0" prefWidth="555.0" text="Inventory" textAlignment="CENTER" textFill="#2e3966" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font name="Calibri Bold" size="40.0" />
          </font>
@@ -17,7 +17,7 @@
             <Font name="Calibri Bold" size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="table" layoutX="24.0" layoutY="225.0" prefHeight="250.0" prefWidth="293.0">
+      <TableView fx:id="table" layoutX="24.0" layoutY="225.0" prefHeight="140.0" prefWidth="293.0">
         <columns>
           <TableColumn fx:id="codeTable" prefWidth="61.0" text="Code" />
           <TableColumn fx:id="nameTable" prefWidth="85.0" text="Name" />
@@ -52,7 +52,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="bttSelect" layoutX="50.0" layoutY="492.0" mnemonicParsing="false" onAction="#select" prefHeight="27.0" prefWidth="142.0" text="Select Product">
+      <Button fx:id="bttSelect" layoutX="40.0" layoutY="379.0" mnemonicParsing="false" onAction="#select" prefHeight="27.0" prefWidth="142.0" text="Select Product">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
@@ -78,7 +78,7 @@
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font></Button>
-      <Button fx:id="bttRemove" layoutX="198.0" layoutY="492.0" mnemonicParsing="false" onAction="#remove" prefHeight="26.0" prefWidth="88.0" text="Remove">
+      <Button fx:id="bttRemove" layoutX="207.0" layoutY="379.0" mnemonicParsing="false" onAction="#remove" prefHeight="26.0" prefWidth="88.0" text="Remove">
          <font>
             <Font name="Calibri Bold" size="14.0" />
          </font>
@@ -92,5 +92,7 @@
             <Font name="Calibri Bold" size="16.0" />
          </font>
       </Label>
+      <Separator layoutX="24.0" layoutY="78.0" prefHeight="6.0" prefWidth="565.0" />
+      <Separator layoutX="342.0" layoutY="84.0" orientation="VERTICAL" prefHeight="332.0" prefWidth="13.0" />
    </children>
 </AnchorPane>
