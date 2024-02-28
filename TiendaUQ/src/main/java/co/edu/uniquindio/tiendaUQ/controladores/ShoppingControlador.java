@@ -37,6 +37,7 @@ public class ShoppingControlador implements Initializable {
             tienda.mostrarMensaje(Alert.AlertType.ERROR, "Se intento seleccionar un producto erroneo");
         } else {
             Producto productoSeleccionado = table.getSelectionModel().getSelectedItem();
+            System.out.println("Producto seleccionado: "+ productoSeleccionado.getNombre() +" " + productoSeleccionado.getCantidad()+ " " + productoSeleccionado.getCodigo());
             int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de su producto"));
             if(tienda.verifyInventory(productoSeleccionado, cantidad)){
                 tienda.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se cargo el producto al carrito");
@@ -67,7 +68,9 @@ public class ShoppingControlador implements Initializable {
             productosCarrito.remove(productoSeleccionado.getCodigo(),productoSeleccionado);
     }
     private void cargarTabla() {
+
         ObservableList<Producto> listaProductos = FXCollections.observableArrayList(tienda.enviarProductos().values());
+
         nameTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         codeTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCodigo()));
         priceTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPrecio()+""));

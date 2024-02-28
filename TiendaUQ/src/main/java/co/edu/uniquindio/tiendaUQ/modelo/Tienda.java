@@ -194,6 +194,18 @@ public class Tienda {
         for (Producto producto : productos.values()) {
             if (producto.getCodigo().equals(productoSeleccionado.getCodigo())) {
                 if(producto.getCantidad()>= cantidad){
+                    Producto productoUpdate = Producto.builder()
+                            .codigo(producto.getCodigo())
+                            .precio(producto.getPrecio())
+                            .cantidad(producto.getCantidad()-cantidad)
+                            .nombre(producto.getNombre())
+                            .build();
+                    productos.replace(producto.getCodigo(),productoUpdate);
+
+                    for (String key : productos.keySet()) {
+                       System.out.println("/new tienda" + key + " = " + productos.get(key).getCantidad());
+                    }
+
                     return true;
                 }else{
                     return false;
