@@ -201,11 +201,6 @@ public class Tienda {
                             .nombre(producto.getNombre())
                             .build();
                     productos.replace(producto.getCodigo(),productoUpdate);
-
-                    for (String key : productos.keySet()) {
-                       System.out.println("/new tienda" + key + " = " + productos.get(key).getCantidad());
-                    }
-
                     return true;
                 }else{
                     return false;
