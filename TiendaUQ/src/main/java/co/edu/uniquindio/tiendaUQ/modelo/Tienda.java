@@ -19,6 +19,9 @@ import java.util.*;
 public class Tienda {
     private final String RUTA_CLIENTES = "src/main/resources/serializable/cliente.ser";
     private final String RUTA_PRODUCTOS = "src/main/resources/serializable/productos.ser";
+
+    private final String RUTA_VENTAS = "src/main/resources/serializable/venta.ser";
+
     private static Tienda tienda;
     private Map<String, Cliente> clientes = new HashMap<>();
     private Map<String, Producto> productos = new HashMap<>();
