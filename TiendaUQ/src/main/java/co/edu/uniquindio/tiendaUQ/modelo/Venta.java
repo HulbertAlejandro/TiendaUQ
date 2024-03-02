@@ -11,7 +11,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class Venta implements Serializable {
+
     private String codigo;
+    private Cliente cliente;
+    private String detalles;
     private LocalDate fecha;
     private Double total;
 }

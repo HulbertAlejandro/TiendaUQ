@@ -25,6 +25,7 @@ public class Tienda {
     private static Tienda tienda;
     private Map<String, Cliente> clientes = new HashMap<>();
     private Map<String, Producto> productos = new HashMap<>();
+    private Set<Producto> productosOrdenados = new TreeSet<>(productos.values());
 
     public static Tienda getInstance() {
         if (tienda == null) {
