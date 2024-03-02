@@ -51,7 +51,10 @@ public class ShoppingControlador implements Initializable {
         }
     }
     public void pay(ActionEvent actionEvent) {
-        
+        if(productosCarrito.isEmpty()){
+            tienda.mostrarMensaje(Alert.AlertType.ERROR,"No se han ingresado productos al carrito");
+            
+        }
     }
     public void remove(ActionEvent actionEvent) {
         if (table1.getSelectionModel().getSelectedIndex() == -1) {
