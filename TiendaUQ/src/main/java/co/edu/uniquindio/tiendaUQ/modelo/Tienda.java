@@ -26,6 +26,8 @@ public class Tienda {
     private Map<String, Cliente> clientes = new HashMap<>();
     private Map<String, Producto> productos = new HashMap<>();
 
+    
+
     public static Tienda getInstance() {
         if (tienda == null) {
             tienda = new Tienda();
