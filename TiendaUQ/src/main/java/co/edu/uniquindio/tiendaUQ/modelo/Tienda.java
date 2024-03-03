@@ -19,13 +19,16 @@ import java.util.*;
 public class Tienda {
     private final String RUTA_CLIENTES = "src/main/resources/serializable/cliente.ser";
     private final String RUTA_PRODUCTOS = "src/main/resources/serializable/productos.ser";
-
     private final String RUTA_VENTAS = "src/main/resources/serializable/venta.ser";
-
     private static Tienda tienda;
     private Map<String, Cliente> clientes = new HashMap<>();
     private Map<String, Producto> productos = new HashMap<>();
-    private Map<String, Producto> carrito;
+    private Map<String, Producto> carrito = new HashMap<>();
+    private ArrayList<Venta> ventas = new ArrayList<>();
+
+    private Map<String, Producto> carritoCompra = new HashMap<>();
+    private Venta ventaRealizada = new Venta();
+    private Cliente CLIENTE_SESION = new Cliente();
 
     public static Tienda getInstance() {
         if (tienda == null) {
@@ -51,7 +54,17 @@ public class Tienda {
             e.printStackTrace();
         }
     }
-
+    private void leerVentas() {
+        ventas = new ArrayList<>();
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_VENTAS))) {
+            ArrayList<Venta> ventas1 = (ArrayList<Venta>) entrada.readObject();
+            for (Venta paquete : ventas1) {
+                ventas.add(paquete);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
     public Cliente registrarCliente(String identificationNumber, String nombre, String direccion, String usuario, String contrasena) throws CampoVacioException, CampoObligatorioException, CampoRepetido {
         if (nombre == null || nombre.isEmpty()) {
             throw new CampoObligatorioException(("Es necesario ingresar el nombre"));
@@ -129,6 +142,7 @@ public class Tienda {
     public void initializar() {
         leerClientes();
         leerProductos();
+        leerVentas();
     }
 
     public void registrarProducto(String name, String code, String price, String quantity) throws CampoObligatorioException, CampoVacioException, CampoRepetido {
@@ -232,6 +246,62 @@ public class Tienda {
     }
     public Map<String, Producto> enviarCarrito () {
        return carrito;
+    }
+
+    public Cliente guardarCliente(String user, String password) {
+        Cliente findUser = new Cliente();
+        for (Cliente cliente : clientes.values()) {
+            if (cliente.getUsuario().equals(user) && cliente.getContrasena().equals(password)) {
+                findUser = cliente;
+            }
+        }
+        return findUser;
+    }
+    public void almacenarCliente(Cliente cliente) {
+        CLIENTE_SESION = cliente;
+    }
+
+    public void serializar() {
+        ArchivoUtils.serializarClientes(RUTA_CLIENTES, (HashMap<String, Cliente>) clientes);
+        ArchivoUtils.serializarProductos(RUTA_PRODUCTOS, (HashMap<String, Producto>) productos);
+        ArchivoUtils.serializarVentas(RUTA_VENTAS, ventas);
+    }
+
+    public Cliente enviarCliente() {
+        return CLIENTE_SESION;
+    }
+
+    public String vincularCodigo() {
+        if(ventas.size() == 0){
+            return "0";
+        }else{
+            int codigo = 0;
+            codigo = Integer.parseInt(ventas.get(ventas.size()-1).getCodigo())+1;
+            return codigo+"";
+        }
+    }
+
+    public void almacenarVenta(Venta venta) {
+        ventas.add(venta);
+        ArchivoUtils.serializarVentas(RUTA_VENTAS,ventas);
+    }
+    public void receiptPage(Venta venta, HashMap<String, Producto> carrito) {
+        ventaRealizada = venta;
+        carritoCompra = carrito;
+    }
+
+    public HashMap<String,Producto> carritoVenta(){
+        return (HashMap<String, Producto>) carritoCompra;
+    }
+    public Venta enviarVenta(){
+        return ventaRealizada;
+    }
+
+    public void inicializar() {
+        carrito = new HashMap<>();
+        carritoCompra = new HashMap<>();
+        ventaRealizada = new Venta();
+        CLIENTE_SESION = new Cliente();
     }
 }
 

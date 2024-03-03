@@ -2,6 +2,7 @@ package co.edu.uniquindio.tiendaUQ.utils;
 
 import co.edu.uniquindio.tiendaUQ.modelo.Cliente;
 import co.edu.uniquindio.tiendaUQ.modelo.Producto;
+import co.edu.uniquindio.tiendaUQ.modelo.Venta;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
@@ -155,5 +156,12 @@ public class ArchivoUtils {
 
         return objeto;
     }
-
+    public static void serializarVentas(String ruta, ArrayList<Venta> ventas) {
+        try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ruta))) {
+            salida.writeObject(ventas);
+            System.out.println("Ventas serializado correctamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

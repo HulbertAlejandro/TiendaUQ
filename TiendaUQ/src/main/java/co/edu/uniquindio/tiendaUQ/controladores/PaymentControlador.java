@@ -2,6 +2,8 @@ package co.edu.uniquindio.tiendaUQ.controladores;
 
 import co.edu.uniquindio.tiendaUQ.modelo.Producto;
 import co.edu.uniquindio.tiendaUQ.modelo.Tienda;
+import co.edu.uniquindio.tiendaUQ.modelo.Venta;
+import co.edu.uniquindio.tiendaUQ.utils.ArchivoUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -34,17 +37,26 @@ public class PaymentControlador implements Initializable {
     @FXML
     void back(ActionEvent event) {
         tienda.loadStage("/ventanas/shopping.fxml",event);
+        tienda.recibirCarrito(carrito);
     }
     @FXML
     void pay(ActionEvent event) {
-
+        Venta venta = Venta.builder()
+                .cliente(tienda.enviarCliente())
+                .codigo(tienda.vincularCodigo())
+                .fecha(LocalDate.now())
+                .total((double) totalVenta).build();
+        tienda.almacenarVenta(venta);
+        tienda.receiptPage(venta, carrito);
+        tienda.loadStage("/ventanas/receipt.fxml",event);
+        tienda.serializar();
     }
     public void recibirCarrito(){
         carrito = (HashMap<String, Producto>) tienda.enviarCarrito();
     }
     public void realizarCuenta(){
         for (Producto producto : carrito.values()){
-            totalVenta += producto.getPrecio();
+            totalVenta += producto.getPrecio()*producto.getCantidad();
         }
         total.setText(String.valueOf(totalVenta));
     }

@@ -39,14 +39,18 @@ public class ShoppingControlador implements Initializable {
             Producto productoSeleccionado = table.getSelectionModel().getSelectedItem();
             System.out.println("Producto seleccionado: "+ productoSeleccionado.getNombre() +" " + productoSeleccionado.getCantidad()+ " " + productoSeleccionado.getCodigo());
             int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de su producto"));
-            if(tienda.verifyInventory(productoSeleccionado, cantidad)){
-                tienda.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se cargo el producto al carrito");
-                productoSeleccionado.setCantidad(cantidad);
-                productosCarrito.put(productoSeleccionado.getCodigo(), productoSeleccionado);
-                cargarTabla();
-                cargarTablaCarrito();
+            if(cantidad<= 0){
+                tienda.mostrarMensaje(Alert.AlertType.ERROR, "Ingrese una cantidad valida");
             }else{
-                tienda.mostrarMensaje(Alert.AlertType.ERROR,"El producto no cuenta con las existencias necesaria");
+                if(tienda.verifyInventory(productoSeleccionado, cantidad)){
+                    tienda.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Se cargo el producto al carrito");
+                    productoSeleccionado.setCantidad(cantidad);
+                    productosCarrito.put(productoSeleccionado.getCodigo(), productoSeleccionado);
+                    cargarTabla();
+                    cargarTablaCarrito();
+                }else{
+                    tienda.mostrarMensaje(Alert.AlertType.ERROR,"El producto no cuenta con las existencias necesaria");
+                }
             }
         }
     }
@@ -63,14 +67,14 @@ public class ShoppingControlador implements Initializable {
             tienda.mostrarMensaje(Alert.AlertType.ERROR, "Se intento seleccionar un producto erroneo");
         } else {
             Producto productoSeleccionado = table1.getSelectionModel().getSelectedItem();
-            eliminarProducto(productoSeleccionado);
+            eliminarProducto(productoSeleccionado, productoSeleccionado.getCodigo());
             tienda.mostrarMensaje(Alert.AlertType.CONFIRMATION, "Producto eliminado correctamente");
             tienda.loadStage("/ventanas/shopping.fxml",actionEvent);
         }
     }
-    private void eliminarProducto(Producto productoSeleccionado) {
-            tienda.updateInventory(productoSeleccionado);
-            productosCarrito.remove(productoSeleccionado.getCodigo(),productoSeleccionado);
+    private void eliminarProducto(Producto productoSeleccionado, String codigo) {
+        tienda.updateInventory(productoSeleccionado);
+        productosCarrito.remove(codigo,productoSeleccionado);
     }
     private void cargarTabla() {
         ObservableList<Producto> listaProductos = FXCollections.observableArrayList(tienda.enviarProductos().values());
@@ -96,6 +100,10 @@ public class ShoppingControlador implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(!tienda.enviarCarrito().isEmpty()){
+            productosCarrito = tienda.enviarCarrito();
+            cargarTablaCarrito();
+        }
        cargarTabla();
     }
 }
