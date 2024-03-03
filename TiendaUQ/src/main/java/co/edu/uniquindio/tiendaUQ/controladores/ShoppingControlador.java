@@ -53,7 +53,9 @@ public class ShoppingControlador implements Initializable {
     public void pay(ActionEvent actionEvent) {
         if(productosCarrito.isEmpty()){
             tienda.mostrarMensaje(Alert.AlertType.ERROR,"No se han ingresado productos al carrito");
-            
+        }else{
+            tienda.recibirCarrito(productosCarrito);
+            tienda.loadStage("/ventanas/paymentPage.fxml", actionEvent);
         }
     }
     public void remove(ActionEvent actionEvent) {
@@ -71,9 +73,7 @@ public class ShoppingControlador implements Initializable {
             productosCarrito.remove(productoSeleccionado.getCodigo(),productoSeleccionado);
     }
     private void cargarTabla() {
-
         ObservableList<Producto> listaProductos = FXCollections.observableArrayList(tienda.enviarProductos().values());
-
         nameTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         codeTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCodigo()));
         priceTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPrecio()+""));

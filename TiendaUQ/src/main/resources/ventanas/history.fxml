@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.HistoryControlador">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.HistoryControlador">
    <children>
       <Label alignment="CENTER" layoutX="142.0" layoutY="14.0" prefHeight="46.0" prefWidth="317.0" text="History" textAlignment="CENTER" textFill="#2e3966" textOverrun="CENTER_ELLIPSIS">
          <font>
@@ -16,7 +12,7 @@
          </font>
       </Label>
       <Separator layoutX="125.0" layoutY="68.0" prefHeight="6.0" prefWidth="328.0" />
-      <Label alignment="CENTER" layoutX="154.0" layoutY="71.0" prefHeight="25.0" prefWidth="293.0" text="History of Products" textAlignment="CENTER" textFill="#2e3966" textOverrun="CENTER_ELLIPSIS">
+      <Label alignment="CENTER" layoutX="154.0" layoutY="71.0" prefHeight="25.0" prefWidth="293.0" text="Sales History" textAlignment="CENTER" textFill="#2e3966" textOverrun="CENTER_ELLIPSIS">
          <font>
             <Font name="Calibri Bold" size="25.0" />
          </font>
@@ -27,9 +23,7 @@
          </columnResizePolicy>
          <columns>
             <TableColumn fx:id="codeTable" prefWidth="93.0" text="Code" />
-            <TableColumn fx:id="nameTable" prefWidth="36.0" text="Name" />
             <TableColumn fx:id="priceTable" prefWidth="236.0" text="Price" />
-            <TableColumn fx:id="quantityTable" prefWidth="95.0" text="Quantity " />
             <TableColumn fx:id="dateTable" prefWidth="75.0" text="Date" />
          </columns>
       </TableView>

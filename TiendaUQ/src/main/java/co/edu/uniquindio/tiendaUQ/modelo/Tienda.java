@@ -25,7 +25,7 @@ public class Tienda {
     private static Tienda tienda;
     private Map<String, Cliente> clientes = new HashMap<>();
     private Map<String, Producto> productos = new HashMap<>();
-    private Set<Producto> productosOrdenados = new TreeSet<>(productos.values());
+    private Map<String, Producto> carrito;
 
     public static Tienda getInstance() {
         if (tienda == null) {
@@ -226,6 +226,12 @@ public class Tienda {
                 productos.replace(productoSeleccionado.getCodigo(), producto, productoReplace);
             }
         }
+    }
+    public void recibirCarrito(Map<String, Producto> productosCarrito) {
+        carrito = productosCarrito;
+    }
+    public Map<String, Producto> enviarCarrito () {
+       return carrito;
     }
 }
 
