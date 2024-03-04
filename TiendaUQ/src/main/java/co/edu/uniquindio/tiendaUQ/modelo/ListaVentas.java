@@ -1,6 +1,8 @@
 package co.edu.uniquindio.tiendaUQ.modelo;
 
-public class ListaVentas {
+import java.io.Serializable;
+
+public class ListaVentas implements Serializable {
     private Nodo nodoPrimero;
     int tamano;
     public ListaVentas(){
@@ -12,8 +14,25 @@ public class ListaVentas {
         if(nodoPrimero == null){
             nodoPrimero = nodo;
         }else{
-            nodo.setSiguiente(nodoPrimero);
+            Nodo base = nodoPrimero;
+            while(base.getSiguiente() != null){
+                base = base.getSiguiente();
+            }
+            base.setSiguiente(nodo);
         }
         tamano+=1;
+    }
+    public void printList(){
+        Nodo nodo = nodoPrimero;
+        while(nodo != null){
+            System.out.println("Codigo de la venta: \n" + nodo.getVenta().getCodigo() +
+                    "\nValor de la venta: \n" + nodo.getVenta().getTotal() +
+                    "\nFecha de la venta: \n" + nodo.getVenta().getFecha() +
+                    "\nNombre del cliente: \n" + nodo.getVenta().getCliente().getNombre());
+            nodo = nodo.getSiguiente();
+        }
+    }
+    public int size(){
+        return tamano;
     }
 }

@@ -20,6 +20,7 @@ public class Tienda {
     private final String RUTA_CLIENTES = "src/main/resources/serializable/cliente.ser";
     private final String RUTA_PRODUCTOS = "src/main/resources/serializable/productos.ser";
     private final String RUTA_VENTAS = "src/main/resources/serializable/venta.ser";
+    private final String RUTA_HISTORIAL = "src/main/resources/serializable/historialVentas.ser";
     private static Tienda tienda;
     private Map<String, Cliente> clientes = new HashMap<>();
     private Map<String, Producto> productos = new HashMap<>();
@@ -58,6 +59,14 @@ public class Tienda {
             for (Venta paquete : ventas1) {
                 ventas.add(paquete);
             }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    private void leerHistorialVentas() {
+        try (ObjectInputStream entrada = new ObjectInputStream(new FileInputStream(RUTA_HISTORIAL))) {
+            ListaVentas ventas1 = (ListaVentas) entrada.readObject();
+            historialVentas = ventas1;
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -134,6 +143,7 @@ public class Tienda {
         leerClientes();
         leerProductos();
         leerVentas();
+        leerHistorialVentas();
     }
     public void registrarProducto(String name, String code, String price, String quantity) throws CampoObligatorioException, CampoVacioException, CampoRepetido {
         if (name == null || name.isEmpty()) {
@@ -244,6 +254,7 @@ public class Tienda {
         ArchivoUtils.serializarClientes(RUTA_CLIENTES, (HashMap<String, Cliente>) clientes);
         ArchivoUtils.serializarProductos(RUTA_PRODUCTOS, (HashMap<String, Producto>) productos);
         ArchivoUtils.serializarVentas(RUTA_VENTAS, ventas);
+        ArchivoUtils.serializarHistorialVentas(RUTA_HISTORIAL,historialVentas);
     }
     public Cliente enviarCliente() {
         return CLIENTE_SESION;
@@ -259,6 +270,7 @@ public class Tienda {
     }
     public void almacenarVenta(Venta venta) {
         historialVentas.anadirVenta(venta);
+        historialVentas.printList();
         ventas.add(venta);
         ArchivoUtils.serializarVentas(RUTA_VENTAS,ventas);
     }

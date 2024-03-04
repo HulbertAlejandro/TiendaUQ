@@ -1,6 +1,7 @@
 package co.edu.uniquindio.tiendaUQ.utils;
 
 import co.edu.uniquindio.tiendaUQ.modelo.Cliente;
+import co.edu.uniquindio.tiendaUQ.modelo.ListaVentas;
 import co.edu.uniquindio.tiendaUQ.modelo.Producto;
 import co.edu.uniquindio.tiendaUQ.modelo.Venta;
 
@@ -160,6 +161,14 @@ public class ArchivoUtils {
         try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ruta))) {
             salida.writeObject(ventas);
             System.out.println("Ventas serializado correctamente.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void serializarHistorialVentas(String ruta, ListaVentas ventas) {
+        try (ObjectOutputStream salida = new ObjectOutputStream(new FileOutputStream(ruta))) {
+            salida.writeObject(ventas);
+            System.out.println("Historial de Ventas serializado correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }
