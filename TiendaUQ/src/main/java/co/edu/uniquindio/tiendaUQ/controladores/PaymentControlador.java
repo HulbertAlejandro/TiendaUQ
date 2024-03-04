@@ -48,6 +48,7 @@ public class PaymentControlador implements Initializable {
                 .total((double) totalVenta).build();
         tienda.almacenarVenta(venta);
         tienda.receiptPage(venta, carrito);
+        tienda.limpiarCarritoPay();
         tienda.loadStage("/ventanas/receipt.fxml",event);
         tienda.serializar();
     }

@@ -75,6 +75,7 @@ public class ShoppingControlador implements Initializable {
     private void eliminarProducto(Producto productoSeleccionado, String codigo) {
         tienda.updateInventory(productoSeleccionado);
         productosCarrito.remove(codigo,productoSeleccionado);
+        tienda.recibirCarrito(productosCarrito);
     }
     private void cargarTabla() {
         ObservableList<Producto> listaProductos = FXCollections.observableArrayList(tienda.enviarProductos().values());
@@ -93,6 +94,7 @@ public class ShoppingControlador implements Initializable {
         table1.setItems(listaCarrito);
     }
     public void back(ActionEvent actionEvent) {
+        tienda.limpiarCarrito((HashMap<String, Producto>) productosCarrito);
         Object evt = actionEvent.getSource();
         if (evt.equals(bttBack)) {
             tienda.loadStage("/ventanas/home.fxml", actionEvent);
