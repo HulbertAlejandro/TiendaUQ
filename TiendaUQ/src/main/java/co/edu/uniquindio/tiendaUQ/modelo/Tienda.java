@@ -22,8 +22,8 @@ public class Tienda {
     private final String RUTA_VENTAS = "src/main/resources/serializable/venta.ser";
     private final String RUTA_HISTORIAL = "src/main/resources/serializable/historialVentas.ser";
     private static Tienda tienda;
-    private Map<String, Cliente> clientes = new HashMap<>();
-    private Map<String, Producto> productos = new HashMap<>();
+    private final Map<String, Cliente> clientes = new HashMap<>();
+    private final Map<String, Producto> productos = new HashMap<>();
     private Map<String, Producto> carrito = new HashMap<>();
     private ArrayList<Venta> ventas = new ArrayList<>();
     private Map<String, Producto> carritoCompra = new HashMap<>();
@@ -81,8 +81,8 @@ public class Tienda {
         if (usuario == null || usuario.isEmpty()) {
             throw new CampoVacioException("Es necesario ingresar el usuario");
         }
-        if (identificationNumber == null) {
-            throw new CampoVacioException("Es necesario ingresar el usuario");
+        if ((tienda.verifyId(identificationNumber) != null) || (identificationNumber == null) || identificationNumber.isEmpty()) {
+            throw new CampoRepetido("Ya se encuentra un usuario registrado con la identificacion");
         }
         if (contrasena == null || contrasena.isEmpty()) {
             throw new CampoVacioException("Es necesario ingresar la contraseña");
@@ -101,11 +101,22 @@ public class Tienda {
         ArchivoUtils.serializarClientes(RUTA_CLIENTES, (HashMap) clientes);
         return cliente;
     }
+    private Cliente verifyId(String identificationNumber) {
+        Cliente cliente = null;
+        for (Cliente client : clientes.values()){
+            if(client.getNumeroIdentificacion().equals(identificationNumber))
+            {
+                cliente =  client;
+            }
+        }
+        return cliente;
+    }
     private boolean verifyCredentials(String usuario, String contrasena) {
         boolean state = false;
         for (Cliente c : clientes.values()) {
             if (c.getUsuario().equals(usuario) && c.getContrasena().equals(contrasena)) {
                 state = true;
+                break;
             }
         }
         return state;
@@ -123,7 +134,7 @@ public class Tienda {
         }
     }
     public boolean verifyUser(String user, String password) {
-        return (findUser(user, password)) ? true : false;
+        return findUser(user, password);
     }
     private boolean findUser(String user, String password) {
         for (Cliente cliente : clientes.values()) {
@@ -165,7 +176,7 @@ public class Tienda {
                 .nombre(name)
                 .cantidad(Integer.parseInt(quantity))
                 .codigo(code)
-                .precio(Float.valueOf(price))
+                .precio(Float.parseFloat(price))
                 .build();
         productos.put(code,producto);
         ArchivoUtils.serializarClientes(RUTA_PRODUCTOS, (HashMap) productos);
@@ -197,7 +208,7 @@ public class Tienda {
         Producto producto = Producto.builder()
                 .nombre(name)
                 .cantidad(Integer.parseInt(quantity))
-                .precio(Float.valueOf(price))
+                .precio(Float.parseFloat(price))
                 .codigo(oldProduct.getCodigo())
                 .build();
         productos.replace(oldProduct.getCodigo(), oldProduct,producto);
@@ -260,7 +271,7 @@ public class Tienda {
         return CLIENTE_SESION;
     }
     public String vincularCodigo() {
-        if(ventas.size() == 0){
+        if(ventas.isEmpty()){
             return "0";
         }else{
             int codigo = 0;
@@ -301,6 +312,18 @@ public class Tienda {
     public void limpiarCarritoPay()
     {
         carrito = new HashMap<>();
+    }
+    public ListaVentas enviarVentas(){
+        return historialVentas;
+    }
+    public ArrayList<Venta> filtrarCliente(ArrayList<Venta> historicoCompras) {
+        ArrayList<Venta> compras = new ArrayList<>();
+        for(Venta venta : historicoCompras){
+            if(venta.getCliente().getNumeroIdentificacion().equals(CLIENTE_SESION.getNumeroIdentificacion())){
+                compras.add(venta);
+            }
+        }
+        return compras;
     }
 }
 

@@ -19,7 +19,7 @@ public class RegisterControlador {
     @FXML
     private Button btnGuardar, btnRegresar;
 
-    public void registrarCliente(ActionEvent actionEvent) {
+    public void registrarCliente(ActionEvent actionEvent) throws CampoObligatorioException,CampoVacioException{
         try {
             Cliente cliente = tienda.registrarCliente(
                     txtIdentificacion.getText(),
@@ -28,14 +28,9 @@ public class RegisterControlador {
                     txtUsuario.getText(),
                     txtContrasena.getText()
             );
-
             tienda.mostrarMensaje(Alert.AlertType.INFORMATION, "Se ha registrado correctamente el cliente: " + cliente.getNombre());
         } catch (CampoRepetido e) {
-            throw new RuntimeException(e);
-        } catch (CampoVacioException e) {
-            throw new RuntimeException(e);
-        } catch (CampoObligatorioException e) {
-            throw new RuntimeException(e);
+            tienda.mostrarMensaje(Alert.AlertType.ERROR,e.getMessage());
         }
     }
 

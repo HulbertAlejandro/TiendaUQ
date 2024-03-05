@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="384.0" prefWidth="360.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendaUQ.controladores.AdminHomeControlador">
+    <children>
+        <Button fx:id="btnInventario" layoutX="99.0" layoutY="164.0" mnemonicParsing="false" onAction="#inventario" prefHeight="46.0" prefWidth="163.0" text="Inventory">
+            <font>
+                <Font name="Calibri Bold" size="15.0" />
+            </font>
+        </Button>
+      <Button fx:id="bttShopping" layoutX="99.0" layoutY="243.0" mnemonicParsing="false" onAction="#historialVentas" prefHeight="46.0" prefWidth="163.0" text="Sales History">
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </Button>
+      <Separator layoutX="14.0" layoutY="89.0" prefHeight="0.0" prefWidth="332.0" />
+      <Label alignment="CENTER" layoutX="15.0" layoutY="23.0" prefHeight="46.0" prefWidth="332.0" text="Administrator Menu" textAlignment="CENTER" textFill="#2e3966" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font name="Calibri Bold" size="35.0" />
+         </font>
+      </Label>
+      <Separator layoutX="14.0" layoutY="227.0" prefHeight="0.0" prefWidth="332.0" />
+      <Separator layoutX="14.0" layoutY="310.0" prefHeight="0.0" prefWidth="332.0" />
+      <Separator layoutX="14.0" layoutY="149.0" prefHeight="0.0" prefWidth="332.0" />
+      <Label alignment="CENTER" layoutX="63.0" layoutY="90.0" prefHeight="57.0" prefWidth="234.0" text="Processes" textAlignment="CENTER" textFill="#2e3966" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font name="Calibri Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="bttBack" layoutX="99.0" layoutY="324.0" mnemonicParsing="false" onAction="#bttBack" prefHeight="46.0" prefWidth="163.0" text="Back">
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </Button>
+    </children>
+
+
+</AnchorPane>

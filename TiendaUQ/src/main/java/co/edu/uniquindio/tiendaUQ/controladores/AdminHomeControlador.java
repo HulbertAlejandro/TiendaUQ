@@ -5,24 +5,23 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class HomeControlador {
+public class AdminHomeControlador {
     private final Tienda tienda = Tienda.getInstance();
     @FXML
     Button btnInventario, bttShopping;
-
-    public void compras(ActionEvent event){
+    public void inventario(ActionEvent event){
         Object evt = event.getSource();
         if(evt.equals(btnInventario)){
-            tienda.loadStage("/ventanas/purchaseHistory.fxml", event);
+            tienda.loadStage("/ventanas/inventoryPage.fxml", event);
         }
     }
-    public void shoppingPage(ActionEvent event){
+    public void historialVentas(ActionEvent event){
         Object evt = event.getSource();
         if(evt.equals(bttShopping)){
-            tienda.loadStage("/ventanas/shopping.fxml", event);
+            tienda.loadStage("/ventanas/salesHistory.fxml", event);
         }
     }
-    public void bttBack(ActionEvent actionEvent){
+    public void bttBack(ActionEvent actionEvent) {
         tienda.loadStage("/ventanas/login.fxml",actionEvent);
     }
 }

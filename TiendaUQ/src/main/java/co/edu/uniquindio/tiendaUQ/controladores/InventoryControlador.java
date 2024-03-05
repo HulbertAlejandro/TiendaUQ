@@ -88,7 +88,7 @@ public class InventoryControlador implements Initializable {
     public void back(ActionEvent actionEvent) {
         Object evt = actionEvent.getSource();
         if (evt.equals(bttBack)) {
-            tienda.loadStage("/ventanas/home.fxml", actionEvent);
+            tienda.loadStage("/ventanas/adminPage.fxml", actionEvent);
         }
     }
     @Override

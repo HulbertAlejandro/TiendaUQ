@@ -97,7 +97,7 @@ public class ShoppingControlador implements Initializable {
         tienda.limpiarCarrito((HashMap<String, Producto>) productosCarrito);
         Object evt = actionEvent.getSource();
         if (evt.equals(bttBack)) {
-            tienda.loadStage("/ventanas/home.fxml", actionEvent);
+            tienda.loadStage("/ventanas/homeClient.fxml", actionEvent);
         }
     }
     @Override

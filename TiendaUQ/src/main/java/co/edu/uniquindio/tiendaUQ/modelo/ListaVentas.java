@@ -1,6 +1,7 @@
 package co.edu.uniquindio.tiendaUQ.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ListaVentas implements Serializable {
     private Nodo nodoPrimero;
@@ -31,6 +32,15 @@ public class ListaVentas implements Serializable {
                     "\nNombre del cliente: \n" + nodo.getVenta().getCliente().getNombre());
             nodo = nodo.getSiguiente();
         }
+    }
+    public ArrayList<Venta> convertArrayList(){
+        ArrayList<Venta> ventas = new ArrayList<>();
+        Nodo nodo = nodoPrimero;
+        while(nodo!=null){
+            ventas.add(nodo.getVenta());
+            nodo = nodo.getSiguiente();
+        }
+        return ventas;
     }
     public int size(){
         return tamano;

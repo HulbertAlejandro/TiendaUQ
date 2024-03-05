@@ -10,15 +10,20 @@ import javafx.scene.control.TextField;
 public class LoginControlador {
     private final Tienda tienda = Tienda.getInstance();
     @FXML
-    private Button buttonLogin, buttonRegister;
+    private Button buttonRegister;
     @FXML
     private TextField user, password;
     public void verify(ActionEvent actionEvent) {
-        if(tienda.verifyUser(user.getText(),password.getText())){
-            tienda.almacenarCliente(tienda.guardarCliente(user.getText(),password.getText()));
-            tienda.loadStage("/ventanas/home.fxml",actionEvent);
+        if(user.getText().equals("admin") && password.getText().equals("admin")){
+            tienda.loadStage("/ventanas/adminPage.fxml", actionEvent);
         }else{
-            tienda.mostrarMensaje(Alert.AlertType.ERROR, "Los datos ingresados son erroneos");
+            if(tienda.verifyUser(user.getText(),password.getText())){
+                tienda.almacenarCliente(tienda.guardarCliente(user.getText(),password.getText()));
+                System.out.println(tienda.enviarCliente().getNombre());
+                tienda.loadStage("/ventanas/homeClient.fxml",actionEvent);
+            }else{
+                tienda.mostrarMensaje(Alert.AlertType.ERROR, "Los datos ingresados son erroneos");
+            }
         }
     }
 
