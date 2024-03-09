@@ -19,6 +19,14 @@ public class RegisterControlador {
     @FXML
     private Button btnGuardar, btnRegresar;
 
+    /*
+    Metodo para registrar a un cliente
+    1. Tiene excepciones en caso de no llenar los datos
+    2. Crea un cliente e invoca el registro desde tienda
+    3. obtiene el texto de cada txt y lo setea a su respectivo campo
+    4. notifica en caso de que esté bien o mal
+    */
+
     public void registrarCliente(ActionEvent actionEvent) throws CampoObligatorioException,CampoVacioException{
         try {
             Cliente cliente = tienda.registrarCliente(
@@ -33,6 +41,10 @@ public class RegisterControlador {
             tienda.mostrarMensaje(Alert.AlertType.ERROR,e.getMessage());
         }
     }
+
+    /*
+    Metodo que regresa a la ventana login al darle al btnRegresar
+    */
 
     public void regresarLogin(ActionEvent event) {
         Object evt = event.getSource();

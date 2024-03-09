@@ -28,6 +28,11 @@ public class ReceiptControlador implements Initializable {
     private TableColumn<Producto, String> nameTable,priceTable,quantityTable,codeTable;
     @FXML
     private TableView<Producto> table;
+
+    /*
+    Metodo que carga la tabla del carrito y la setea
+    */
+
     private void cargarTabla() {
         ObservableList<Producto> listaProductos = FXCollections.observableArrayList(tienda.carritoVenta().values());
         nameTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
@@ -36,6 +41,11 @@ public class ReceiptControlador implements Initializable {
         quantityTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCantidad()+""));
         table.setItems(listaProductos);
     }
+
+    /*
+    Metodo que carga los datos de la venta para setear en la ventana de recibo
+    */
+
     private void cargarDatos() {
         Venta venta = tienda.enviarVenta();
         address.setText(venta.getCliente().getDireccion());
@@ -44,15 +54,25 @@ public class ReceiptControlador implements Initializable {
         name.setText(venta.getCliente().getNombre());
         receipt.setText(venta.getCodigo());
     }
+
+    /*
+    Metodo que regresa a la ventana de login
+    */
+
     @FXML
     void back(ActionEvent event) {
         tienda.inicializar();
         tienda.loadStage("/ventanas/login.fxml",event);
     }
 
+    /*
+    Metodo para inicializar las tablas y los datos del recibo
+    */
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cargarTabla();
         cargarDatos();
     }
+
 }

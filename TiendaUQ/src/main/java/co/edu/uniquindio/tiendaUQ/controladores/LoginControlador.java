@@ -13,6 +13,13 @@ public class LoginControlador {
     private Button buttonRegister;
     @FXML
     private TextField user, password;
+    /**
+     * Verifica las credenciales del usuario cuando se realiza un evento de acción.
+     * Si el usuario y la contraseña coinciden con "admin", carga la página de administrador.
+     * Si las credenciales son válidas, carga la página de inicio del cliente y almacena el cliente.
+     * Si las credenciales son inválidas, muestra un mensaje de error.
+     * @param actionEvent El evento de acción que desencadena la verificación de las credenciales.
+     */
     public void verify(ActionEvent actionEvent) {
         if(user.getText().equals("admin") && password.getText().equals("admin")){
             tienda.loadStage("/ventanas/adminPage.fxml", actionEvent);
@@ -26,7 +33,11 @@ public class LoginControlador {
             }
         }
     }
-
+    
+    /**
+    Metodo que avanza a la ventana de registro de usuarios
+    */
+    
     public void registrarUsuario(ActionEvent event){
         Object evt = event.getSource();
         if(evt.equals(buttonRegister)){

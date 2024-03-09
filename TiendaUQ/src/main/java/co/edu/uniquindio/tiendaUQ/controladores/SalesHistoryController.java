@@ -20,6 +20,12 @@ public class SalesHistoryController implements Initializable {
     private TableColumn<Venta,String> dateTable, nameTable, priceTable;
     @FXML
     private TableView<Venta> table;
+    
+    /*
+    Metodo que carga la tabla del historial de ventas
+    1. Setea la lista de producto obteniendo el historico de ventas observable en la tabla
+    */
+    
     private void cargarTabla() {
         ArrayList<Venta> historicoVentas = tienda.enviarVentas().convertArrayList();
         ObservableList<Venta> listaProductos = FXCollections.observableArrayList(historicoVentas);
@@ -28,11 +34,21 @@ public class SalesHistoryController implements Initializable {
         priceTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTotal()+""));
         table.setItems(listaProductos);
     }
+    
+    /*
+    Metodo que retorna a la pagina de administrador
+    */
+    
     @FXML
     void back(ActionEvent event) {
         tienda.inicializar();
         tienda.loadStage("/ventanas/adminPage.fxml",event);
     }
+    
+    /*
+    Inicializa la tabla al cargar la ventana
+    */
+    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cargarTabla();

@@ -26,6 +26,11 @@ public class PurchaseHistoryController implements Initializable {
     private TableView<Venta> table;
     @FXML
     private Label name,address,id;
+    
+    /*
+    Metodo que carga la tabla del historico de compras y setea en la tabla por sus valores
+    */
+    
     private void cargarTabla() {
         ObservableList<Venta> listaProductos = FXCollections.observableArrayList(historicoCompras);
         nameTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCliente().getNombre()));
@@ -33,11 +38,22 @@ public class PurchaseHistoryController implements Initializable {
         priceTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTotal()+""));
         table.setItems(listaProductos);
     }
+    
+    /*
+    Metodo que retorna a la ventana de homeClient
+    */
+    
     @FXML
     void back(ActionEvent event) {
         tienda.inicializar();
         tienda.loadStage("/ventanas/homeClient.fxml",event);
     }
+    
+    /*
+    Metodo que inicializa los datos en la ventana de historial de ventas y setea sus valores
+    tambien obtiene el arraylis del historico de ventas y las imprime filtrando por cliente
+    */
+    
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Cliente cliente = tienda.enviarCliente();
