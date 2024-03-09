@@ -365,6 +365,7 @@ public class Tienda {
      */
     public void almacenarCliente(Cliente cliente) {
         CLIENTE_SESION = cliente;
+        System.out.println(CLIENTE_SESION.getNombre());
     }
     /*
     METODO PARA SERIALIZAR LOS DATOS ALMACENADOS

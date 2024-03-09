@@ -34,11 +34,9 @@ public class SalesHistoryController implements Initializable {
         priceTable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTotal()+""));
         table.setItems(listaProductos);
     }
-    
     /*
     Metodo que retorna a la pagina de administrador
     */
-    
     @FXML
     void back(ActionEvent event) {
         tienda.inicializar();

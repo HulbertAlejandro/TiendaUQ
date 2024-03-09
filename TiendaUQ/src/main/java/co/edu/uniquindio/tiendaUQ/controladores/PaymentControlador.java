@@ -56,6 +56,7 @@ public class PaymentControlador implements Initializable {
                 .codigo(tienda.vincularCodigo())
                 .fecha(LocalDate.now())
                 .total((double) totalVenta).build();
+        System.out.println(venta.getCliente().getNombre());
         tienda.almacenarVenta(venta);
         tienda.receiptPage(venta, carrito);
         tienda.limpiarCarritoPay();
